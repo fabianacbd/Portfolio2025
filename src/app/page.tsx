@@ -124,7 +124,6 @@ export default function Home() {
         </Column>
       )}
       <Projects range={[2]} />
-      <Mailchimp />
     </Column>
   );
 }
