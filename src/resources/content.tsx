@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "Barbati",
   name: `Fabiana Barbati`,
   role: "Web developer",
-  avatar: "/images/avatar.jpg",
+  avatar: "/images/projects/project-01/AVATARCHATGPT.png",
   email: "fabianbarbaticbd@gmail.com",
   languages: ["English", "Spanish"], // optional: Leave the array empty if you don't want to display languages
 };
@@ -19,13 +19,13 @@ const social: Social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system",
+    link: "https://github.com/fabianacbd",
     essential: true,
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/fabiana-barbati-4aaa7a243/",
     essential: true,
   },
   {
@@ -34,12 +34,7 @@ const social: Social = [
     link: "https://www.instagram.com/once_ui/",
     essential: false,
   },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
-    essential: true,
-  },
+
   {
     name: "Email",
     icon: "email",
@@ -70,7 +65,7 @@ const home: Home = {
   },
   subline: (
     <>
-    I'm Fabiana Barbati, a student multiplataform developer at <Text as="span" size="xl" weight="strong">The Power MBA</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
+    I'm Fabiana Barbati, a multiplataform developer student at <Text as="span" size="xl" weight="strong">The Power MBA</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
 </>
   ),
 };
@@ -96,7 +91,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Fabiana is a Venezuelan girl who has been living in Madrid for about three years. She's a student of Multiplatform Application Development and has a master's degree in Web Application Development. She's passionate about frontend development and designing websites and apps.
+        Fabiana is a Venezuelan girl who has been living in Madrid for three years. She's a student of Multiplatform Application Development and has a master's degree in Web Application Development. She's passionate about frontend development and designing websites and apps.
       </>
     ),
   },
@@ -164,23 +159,38 @@ const about: About = {
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
+            src: "/images/projects/project-01/Figma-Logo-700x300.png",
             alt: "Project image",
             width: 16,
             height: 9,
           },
         ],
       },
+  {
+          title: "Databases",
+          description: (
+            <>I can work with databases such as MongoDB, MySQL, and PostgreSQL.</>
+          ),
+          tags: [
+            {
+              name: "Figma",
+              icon: "figma",
+            },
+          ],
+          // optional: leave the array empty if you don't want to display images
+          images: [
+            {
+              src: "/images/projects/project-01/MongoDB-Logo-500x313.png",
+              alt: "Project image",
+              width: 16,
+              height: 9,
+            },
+          ],
+        },
       {
-        title: "Next.js",
+        title: "Programming languages",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>Capable of building complete projects with these languages.</>
         ),
         tags: [
           {
@@ -188,18 +198,16 @@ const about: About = {
             icon: "javascript",
           },
           {
-            name: "Next.js",
-            icon: "nextjs",
+            name: "CSS",
           },
           {
-            name: "Supabase",
-            icon: "supabase",
+            name: "HTML",
           },
         ],
         // optional: leave the array empty if you don't want to display images
         images: [
           {
-            src: "/images/projects/project-01/cover-04.jpg",
+            src: "/images/projects/project-01/logos.png",
             alt: "Project image",
             width: 16,
             height: 9,
@@ -210,14 +218,6 @@ const about: About = {
   },
 };
 
-const blog: Blog = {
-  path: "/blog",
-  label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
-};
 
 const work: Work = {
   path: "/work",
@@ -237,7 +237,7 @@ const gallery: Gallery = {
   // These are placeholder images, replace with your own
   images: [
     {
-      src: "/images/gallery/horizontal-1.jpg",
+      src: "/images/gallery/image0.jpeg",
       alt: "image",
       orientation: "horizontal",
     },
