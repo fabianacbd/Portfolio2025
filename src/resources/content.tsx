@@ -224,14 +224,6 @@ const work: Work = {
   label: "Work",
   title: `Projects – ${person.name}`,
   description: `Design and dev projects by ${person.name}`,
-  images: [
-            {
-              src: "/images/projects/project-01/AVATARCHATGPT.png",
-              alt: "Project image",
-              width: 16,
-              height: 9,
-            },
-          ],
 };
 
 const gallery: Gallery = {
