@@ -5,10 +5,10 @@ import { projects } from "@/data/projects";
 
 export async function generateMetadata() {
   return Meta.generate({
-    title: work.title,
+    title: "Projects",
     description: work.description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(work.title)}`,
+    image:"/images/projects/project-01/logos.png",
     path: work.path,
   });
 }
@@ -20,7 +20,7 @@ export default function Work() {
         as="webPage"
         baseURL={baseURL}
         path={work.path}
-        title={work.title}
+        title={"HOLA"}
         description={work.description}
         image={`/api/og/generate?title=${encodeURIComponent(work.title)}`}
         author={{
@@ -36,9 +36,6 @@ export default function Work() {
 
       {/* 🔽 proyectos manuales */}
       <Projects items={projects} />
-      <Heading variant="display-strong-xl">
-        ESTOY EN WORK/PAGE.TSX
-      </Heading>
     </Column>
   );
 }

@@ -46,9 +46,7 @@ export async function generateMetadata({
     title: project.metadata.title,
     description: project.metadata.summary,
     baseURL,
-    image:
-      project.metadata.image ||
-      `/api/og/generate?title=${project.metadata.title}`,
+    image: "/images/projects/project-01/logos.png",
     path: `${work.path}/${project.slug}`,
   });
 }
@@ -81,7 +79,7 @@ export default async function Project({
         as="blogPosting"
         baseURL={baseURL}
         path={`${work.path}/${project.slug}`}
-        title={project.metadata.title}
+        title= "HOLA"
         description={project.metadata.summary}
         datePublished={project.metadata.publishedAt}
         dateModified={project.metadata.publishedAt}
@@ -133,7 +131,7 @@ export default async function Project({
           aspectRatio="16 / 9"
           radius="m"
           alt="image"
-          src={project.metadata.images[0]}
+          src={"/images/projects/project-01/logos.png"}
         />
       )}
 
