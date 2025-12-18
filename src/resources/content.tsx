@@ -8,7 +8,8 @@ const person: Person = {
   role: "Web developer",
   avatar: "/images/projects/project-01/AVATARCHATGPT.png",
   email: "fabianbarbaticbd@gmail.com",
-  languages: ["English", "Spanish"], // optional: Leave the array empty if you don't want to display languages
+  languages: ["English", "Spanish"],
+  location: "",
 };
 
 
