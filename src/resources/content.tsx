@@ -9,7 +9,6 @@ const person: Person = {
   avatar: "/images/projects/project-01/AVATARCHATGPT.png",
   email: "fabianbarbaticbd@gmail.com",
   languages: ["English", "Spanish"],
-  location: "Europe/Spain",
 };
 
 
