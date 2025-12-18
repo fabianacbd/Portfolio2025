@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getPosts } from "@/utils/utils";
 import {
   Meta,
   Schema,
@@ -21,11 +22,11 @@ import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  return projects.map((project) => ({
-    slug: project.slug,
+  const posts = getPosts(["src", "app", "work", "projects"]);
+  return posts.map((post) => ({
+    slug: post.slug,
   }));
 }
-
 
 export async function generateMetadata({
   params,
@@ -37,19 +38,19 @@ export async function generateMetadata({
     ? routeParams.slug.join("/")
     : routeParams.slug || "";
 
-  const project = projects.find((p) => p.slug === slugPath);
+  const posts = getPosts(["src", "app", "work", "projects"]);
+  let post = posts.find((post) => post.slug === slugPath);
 
-  if (!project) return {};
+  if (!post) return {};
 
   return Meta.generate({
-    title: project.metadata.title,
-    description: project.metadata.summary,
-    baseURL,
-    image: "/images/projects/project-01/logos.png",
-    path: `${work.path}/${project.slug}`,
+    title: post.metadata.title,
+    description: post.metadata.summary,
+    baseURL: baseURL,
+    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
+    path: `${work.path}/${post.slug}`,
   });
 }
-
 
 export default async function Project({
   params,
@@ -61,14 +62,14 @@ export default async function Project({
     ? routeParams.slug.join("/")
     : routeParams.slug || "";
 
-  const project = projects.find((p) => p.slug === slugPath);
+  let post = getPosts(["src", "app", "work", "projects"]).find((post) => post.slug === slugPath);
 
-  if (!project) {
+  if (!post) {
     notFound();
   }
 
   const avatars =
-    project.metadata.team?.map((person) => ({
+    post.metadata.team?.map((person) => ({
       src: person.avatar,
     })) || [];
 
@@ -77,16 +78,13 @@ export default async function Project({
       <Schema
         as="blogPosting"
         baseURL={baseURL}
-        path={`${work.path}/${project.slug}`}
-        title= "HOLA"
-        description={project.metadata.summary}
-        datePublished={project.metadata.publishedAt}
-        dateModified={project.metadata.publishedAt}
+        path={`${work.path}/${post.slug}`}
+        title={post.metadata.title}
+        description={post.metadata.summary}
+        datePublished={post.metadata.publishedAt}
+        dateModified={post.metadata.publishedAt}
         image={
-          project.metadata.image ||
-          `/api/og/generate?title=${encodeURIComponent(
-            project.metadata.title
-          )}`
+          post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`
         }
         author={{
           name: person.name,
@@ -94,60 +92,46 @@ export default async function Project({
           image: `${baseURL}${person.avatar}`,
         }}
       />
-
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
           <Text variant="label-strong-m">Projects</Text>
         </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak">
-          {project.metadata.publishedAt &&
-            formatDate(project.metadata.publishedAt)}
+        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
+          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
         </Text>
-        <Heading variant="display-strong-m">
-          {project.metadata.title}
-        </Heading>
+        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
       </Column>
-
-      {project.metadata.team?.length > 0 && (
+      <Row marginBottom="32" horizontal="center">
         <Row gap="16" vertical="center">
-          <AvatarGroup reverse avatars={avatars} size="s" />
+          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
           <Text variant="label-default-m" onBackground="brand-weak">
-            {project.metadata.team.map((member, idx) => (
+            {post.metadata.team?.map((member, idx) => (
               <span key={idx}>
-                {idx > 0 && ", "}
-                <SmartLink href={member.linkedIn}>
-                  {member.name}
-                </SmartLink>
+                {idx > 0 && (
+                  <Text as="span" onBackground="neutral-weak">
+                    ,{" "}
+                  </Text>
+                )}
+                <SmartLink href={member.linkedIn}>{member.name}</SmartLink>
               </span>
             ))}
           </Text>
         </Row>
+      </Row>
+      {post.metadata.images.length > 0 && (
+        <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />
       )}
-
-      {project.metadata.images.length > 0 && (
-        <Media
-          priority
-          aspectRatio="16 / 9"
-          radius="m"
-          alt="image"
-          src={"/images/projects/project-01/logos.png"}
-        />
-      )}
-
-      <Column as="article" maxWidth="xs">
-        <CustomMDX source={project.content} />
+      <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
+        <CustomMDX source={post.content} />
       </Column>
-
       <Column fillWidth gap="40" horizontal="center" marginTop="40">
         <Line maxWidth="40" />
-        <Heading as="h2" variant="heading-strong-xl">
+        <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
           Related projects
         </Heading>
-        <Projects exclude={[project.slug]} range={[2]} />
+        <Projects exclude={[post.slug]} range={[2]} />
       </Column>
-
       <ScrollToHash />
     </Column>
   );
 }
-
